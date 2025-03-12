@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import styles from "./page.module.css";
 
@@ -11,10 +11,15 @@ export default function Home() {
   const [coloredCells, setColoredCells] = useState({});
   const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0, cell: null });
   const [principalColor, setPrincipalColor] = useState('red');
+  const [screenHeight, setScreenHeight] = useState(0);
   const tempCells = useRef(new Set());
   const clickedMouseDown = useRef(false);
 
-  const screenHeight = typeof window !== undefined ? window.innerHeight : 0;
+  useEffect(() => {
+    if (window === 'undefined') return;
+
+    setScreenHeight(window.innerHeight);
+  }, []);
 
   const handleClick = (cell, color) => {
     setPrincipalColor(color);

@@ -44,7 +44,7 @@ export default function Home() {
   const handleMouseDown = (idx) => {
     tempCells.current.clear();
     clickedMouseDown.current = true;
-    handleClick(idx, principalColor);
+    // handleClick(idx, principalColor);
   };
 
   const handleMouseUp = () => {
@@ -56,11 +56,6 @@ export default function Home() {
 
   const handleMouseOver = (idx) => {
     if (clickedMouseDown.current) handleClick(idx, principalColor);
-    // if (!clickedMouseDown) return;
-
-    // if (!tempCells.current.has(idx)) {
-    //   tempCells.current.add(idx);
-    // }
   };
 
   return (

@@ -55,11 +55,12 @@ export default function Home() {
   };
 
   const handleMouseOver = (idx) => {
-    if (!clickedMouseDown) return;
+    if (clickedMouseDown.current) handleClick(idx, principalColor);
+    // if (!clickedMouseDown) return;
 
-    if (!tempCells.current.has(idx)) {
-      tempCells.current.add(idx);
-    }
+    // if (!tempCells.current.has(idx)) {
+    //   tempCells.current.add(idx);
+    // }
   };
 
   return (

@@ -52,6 +52,7 @@ export default function Home() {
     for (const cell of tempCells.current) {
       handleClick(cell, principalColor);
     }
+    clickedMouseDown.current = false;
   };
 
   const handleMouseOver = (idx) => {

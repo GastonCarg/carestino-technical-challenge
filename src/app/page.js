@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 import styles from "./page.module.css";
 
@@ -11,8 +11,8 @@ export default function Home() {
   const [coloredCells, setColoredCells] = useState({});
   const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0, cell: null });
   const [principalColor, setPrincipalColor] = useState('red');
-  const [clickedMouseDown, setClickedMouseDown] = useState(false);
-  const [listCellToColor, setListCellToColor] = useState(new Set());
+  const tempCells = useRef(new Set());
+  const clickedMouseDown = useRef(false);
 
   const screenHeight = typeof window !== undefined ? window.innerHeight : 0;
 
@@ -37,31 +37,24 @@ export default function Home() {
   };
 
   const handleMouseDown = (idx) => {
-    handleClick(idx, principalColor);
-    setClickedMouseDown(true);
+    tempCells.current.clear();
+    clickedMouseDown.current = true;
+    tempCells.current.add(idx);
   };
 
   const handleMouseUp = (idx) => {
     handleClick(idx, principalColor);
-    setClickedMouseDown(false);
-
-    listCellToColor.map((cell) => {
+    for (const cell of tempCells.current) {
       handleClick(cell, principalColor);
-    });
-
-    setListCellToColor([]);
+    }
   };
 
   const handleMouseOver = (idx) => {
     if (!clickedMouseDown) return;
 
-    setListCellToColor(prevState => {
-      const newSet = new Set(prevState);
-      if (newSet.has(idx)) return prevState;
-
-      newSet.add(idx);
-      return Array.from(newSet);
-    });
+    if (!tempCells.current.has(idx)) {
+      tempCells.current.add(idx);
+    }
   };
 
   return (

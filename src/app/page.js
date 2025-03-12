@@ -48,7 +48,7 @@ export default function Home() {
   };
 
   const handleMouseUp = (idx) => {
-    handleClick(idx, principalColor);
+    tempCells.current.add(idx);
     for (const cell of tempCells.current) {
       handleClick(cell, principalColor);
     }

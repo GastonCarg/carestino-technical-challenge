@@ -32,9 +32,11 @@ export default function Home() {
   const handleRightClick = (event, cell) => {
     event.preventDefault();
     setContextMenu({ visible: true, x: event.clientX, y: event.clientY, cell });
+    clickedMouseDown.current = false;
   };
 
   const selectColor = (color) => {
+    clickedMouseDown.current = false;
     if (contextMenu.cell !== null) {
       handleClick(contextMenu.cell, color);
       setContextMenu({ visible: false, x: 0, y: 0, cell: null });
@@ -44,7 +46,6 @@ export default function Home() {
   const handleMouseDown = (idx) => {
     tempCells.current.clear();
     clickedMouseDown.current = true;
-    // handleClick(idx, principalColor);
   };
 
   const handleMouseUp = () => {

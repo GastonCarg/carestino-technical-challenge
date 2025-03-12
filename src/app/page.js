@@ -47,8 +47,7 @@ export default function Home() {
     handleClick(idx, principalColor);
   };
 
-  const handleMouseUp = (idx) => {
-    tempCells.current.add(idx);
+  const handleMouseUp = () => {
     for (const cell of tempCells.current) {
       handleClick(cell, principalColor);
     }
@@ -75,7 +74,7 @@ export default function Home() {
           style={{ backgroundColor: coloredCells[idx] || "white" }}
           onMouseDown={() => handleMouseDown(idx)}
           onMouseOver={() => handleMouseOver(idx)}
-          onMouseUp={() => handleMouseUp(idx)}
+          onMouseUp={handleMouseUp}
         ></section>
       ))}
 
